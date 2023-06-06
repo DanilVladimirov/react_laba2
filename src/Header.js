@@ -7,14 +7,20 @@ import {
     Form,
     Button
 } from "react-bootstrap";
+import Contacts from './Pages/Contacts';
+import Home from './Pages/Home';
+import Blog from './Pages/Blog';
+import About from './Pages/About';
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 import logo from "./logo.png";
 
 export default class Header extends Component {
+    
     render() {
         return (
             <>
-            <Navbar fixed="top" collapseOnSelect expand="md" bg="dark" variant="dark">
+            <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
                 <Container>
                     <Navbar.Brand href="/">
                        <img
@@ -30,7 +36,7 @@ export default class Header extends Component {
                         <Nav claccName="me-auto">
                             <Nav.Link href="/"> Home </Nav.Link>
                             <Nav.Link href="/about"> About us </Nav.Link>
-                            <Nav.Link href="/contacts"> Contacts </Nav.Link>
+                            <Nav.Link href="contacts"> Contacts </Nav.Link>
                             <Nav.Link href="/blog"> Blog </Nav.Link>
                         </Nav>
                         <Form className="d-flex">
@@ -43,7 +49,16 @@ export default class Header extends Component {
                         </Form>
                     </Navbar.Collapse>
                 </Container>
+                
             </Navbar>
+            <BrowserRouter >
+                <Routes>
+                    <Route path="/" element={<Home  />}/>
+                    <Route path="/about" element={<About/>}/>
+                    <Route path="/contacts" element={<Contacts/>}/>
+                    <Route path="/blog" element={<Blog/>}/>
+                </Routes>
+            </BrowserRouter >
             </>
         )
     }
