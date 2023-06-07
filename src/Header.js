@@ -1,16 +1,7 @@
 import React, {
     Component,
     useState,
-    setEmail,
-    setEmailError,
-    setPassword,
-    setPasswordError,
-    setEmailDirty,
-    setPasswordDirty,
-    useEffect,
-    emailError,
-    passwordError,
-    setFormValid
+    useEffect
 } from "react";
 import {
     Navbar,
@@ -27,6 +18,12 @@ import Blog from './Pages/Blog';
 import About from './Pages/About';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import logo from "./logo.png";
+import Team1 from './Pages/Teams/Team1.js';
+import Team2 from './Pages/Teams/Team2.js';
+import Team3 from './Pages/Teams/Team3.js';
+import Blog1 from './Pages/Blogs/Blog1.js';
+import Blog2 from './Pages/Blogs/Blog2.js';
+import Blog3 from './Pages/Blogs/Blog3.js';
 
 
 export default function Header() {
@@ -157,6 +154,14 @@ export default function Header() {
                     <Route path="/about" element={<About />} />
                     <Route path="/contacts" element={<Contacts />} />
                     <Route path="/blog" element={<Blog />} />
+
+                    <Route path="/team1" element={<Team1 />} />
+                    <Route path="/team2" element={<Team2 />} />
+                    <Route path="/team3" element={<Team3 />} />
+
+                    <Route path="/blog1" element={<Blog1 />} />
+                    <Route path="/blog2" element={<Blog2 />} />
+                    <Route path="/blog3" element={<Blog3 />} />
                 </Routes>
             </BrowserRouter >
         </>

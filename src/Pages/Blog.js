@@ -12,11 +12,11 @@ class Blog extends Component {
                                 width={200}
                                 height={150}
                                 className="mr-3"
-                                src="https://dprism.in/wp-content/uploads/2018/03/team-img.jpg"
+                                src="https://st2.depositphotos.com/3261171/7891/i/450/depositphotos_78914256-stock-photo-man-drinking-tea-and-eading.jpg"
                                 alt="photo" />
                         </div>
                         <div className="flex-grow-1 ms-3">
-                            <h5>Blog post</h5>
+                            <h5><a href='/blog1'>Blog post 1</a></h5>
                             <p>
                                 Lorem
                             </p>
@@ -29,11 +29,11 @@ class Blog extends Component {
                                 width={200}
                                 height={150}
                                 className="mr-3"
-                                src="https://dprism.in/wp-content/uploads/2018/03/team-img.jpg"
+                                src="https://st3.depositphotos.com/3591429/18863/i/1600/depositphotos_188634212-stock-photo-man-reading-newspaper-fake-news.jpg"
                                 alt="photo" />
                         </div>
                         <div className="flex-grow-1 ms-3">
-                            <h5>Blog post</h5>
+                            <h5><a href='/blog2'>Blog post 2</a></h5>
                             <p>
                                 Lorem
                             </p>
@@ -46,11 +46,11 @@ class Blog extends Component {
                                 width={200}
                                 height={150}
                                 className="mr-3"
-                                src="https://dprism.in/wp-content/uploads/2018/03/team-img.jpg"
+                                src="https://c8.alamy.com/comp/BE4PYY/older-man-reading-newspaper-with-angry-expression-BE4PYY.jpg"
                                 alt="photo" />
                         </div>
                         <div className="flex-grow-1 ms-3">
-                            <h5>Blog post</h5>
+                            <h5><a href='/blog3'>Blog post 3</a></h5>
                             <p>
                                 Lorem
                             </p>
