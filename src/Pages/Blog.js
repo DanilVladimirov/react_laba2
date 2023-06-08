@@ -10,7 +10,8 @@ export default function Blog() {
             url: "/blog1",
             imgUrl: "https://st2.depositphotos.com/3261171/7891/i/450/depositphotos_78914256-stock-photo-man-drinking-tea-and-eading.jpg",
             content: "Lorem ipsum.",
-            date: new Date("2021-07-15T16:30:00.000Z")
+            date: new Date("2021-07-15T16:30:00.000Z"),
+            category: "банани"
         },
         {
             id: 2,
@@ -18,7 +19,8 @@ export default function Blog() {
             url: "/blog2",
             imgUrl: "https://st3.depositphotos.com/3591429/18863/i/1600/depositphotos_188634212-stock-photo-man-reading-newspaper-fake-news.jpg",
             content: "Lorem ipsum.",
-            date: new Date("2023-01-15T16:30:00.000Z")
+            date: new Date("2023-01-15T16:30:00.000Z"),
+            category: "категорія 1"
         },
         {
             id: 3,
@@ -26,7 +28,8 @@ export default function Blog() {
             url: "/blog3",
             imgUrl: "https://c8.alamy.com/comp/BE4PYY/older-man-reading-newspaper-with-angry-expression-BE4PYY.jpg",
             content: "Lorem ipsum.",
-            date: new Date("2020-01-15T16:30:00.000Z")
+            date: new Date("2020-01-15T16:30:00.000Z"),
+            category: "банани"
         },
         {
             id: 4,
@@ -34,7 +37,8 @@ export default function Blog() {
             url: "/blog3",
             imgUrl: "https://c8.alamy.com/comp/BE4PYY/older-man-reading-newspaper-with-angry-expression-BE4PYY.jpg",
             content: "Lorem ipsum.",
-            date: new Date("2020-01-15T16:30:00.000Z")
+            date: new Date("2020-01-15T16:30:00.000Z"),
+            category: "категорія 1"
         },
         {
             id: 5,
@@ -42,7 +46,8 @@ export default function Blog() {
             url: "/blog3",
             imgUrl: "https://c8.alamy.com/comp/BE4PYY/older-man-reading-newspaper-with-angry-expression-BE4PYY.jpg",
             content: "Lorem ipsum.",
-            date: new Date("2020-01-15T16:30:00.000Z")
+            date: new Date("2020-01-15T16:30:00.000Z"),
+            category: "категорія 1"
         }
     ];
 
@@ -51,8 +56,14 @@ export default function Blog() {
     const [currentPage, setCurrentPage] = useState(1);
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = sortedPosts.slice(indexOfFirstPost, indexOfLastPost);
-    const totalPages = Math.ceil(posts.length / postsPerPage);
+    const [selectedCategory, setSelectedCategory] = useState(null);
+
+    const filteredPosts = selectedCategory
+        ? sortedPosts.filter((post) => post.category === selectedCategory)
+        : sortedPosts;
+
+    const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+    const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
 
     const [ratings, setRatings] = useState({});
 
@@ -77,6 +88,10 @@ export default function Blog() {
         }));
     };
 
+    const handleCategoryClick = (category) => {
+        setSelectedCategory(category);
+        setCurrentPage(1);
+    };
 
     return (
         <Row>
@@ -105,6 +120,7 @@ export default function Blog() {
                         />
                         <div className="flex-grow-1 ms-3">
                             <h5><a href={post.url}>{post.title}</a></h5>
+                            <h7>категорія: {post.category}</h7>
                             <p>
                                 {post.content}
                             </p>
@@ -130,11 +146,19 @@ export default function Blog() {
 
                 <Card>
                     <ListGroup variant="flush">
-                        <ListGroup.Item>категорія 1</ListGroup.Item>
-                        <ListGroup.Item>категорія 2</ListGroup.Item>
-                        <ListGroup.Item>категорія 3</ListGroup.Item>
-                        <ListGroup.Item>категорія 4</ListGroup.Item>
-                        <ListGroup.Item>категорія 5</ListGroup.Item>
+                        <ListGroup.Item>Всі категорії</ListGroup.Item>
+                        <ListGroup.Item
+                            active={selectedCategory === 'категорія 1'}
+                            onClick={() => handleCategoryClick('категорія 1')}
+                        >
+                            категорія 1
+                        </ListGroup.Item>
+                        <ListGroup.Item
+                            active={selectedCategory === 'банани'}
+                            onClick={() => handleCategoryClick('банани')}
+                        >
+                            категорія 2
+                        </ListGroup.Item>
                     </ListGroup>
                 </Card>
                 <Card className="mt-3 bg-light">
