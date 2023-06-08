@@ -1,90 +1,98 @@
-import React, { Component } from 'react';
+import React, { Component, useState} from 'react';
 import {Container, Col, Row, Card, ListGroup} from "react-bootstrap";
 
-class Blog extends Component {
-    render() {
-        return (
-            <Row>
-                <Col md="9">
+export default function Blog() {
+    const posts = [
+        {
+          id: 1,
+          title: "Blog post 1",
+          url: "/blog1",
+          imgUrl: "https://st2.depositphotos.com/3261171/7891/i/450/depositphotos_78914256-stock-photo-man-drinking-tea-and-eading.jpg",
+          content: "Lorem ipsum.",
+          date: new Date("2021-07-15T16:30:00.000Z")
+        },
+        {
+            id: 2,
+            title: "Blog post 2",
+            url: "/blog2",
+            imgUrl: "https://st3.depositphotos.com/3591429/18863/i/1600/depositphotos_188634212-stock-photo-man-reading-newspaper-fake-news.jpg",
+            content: "Lorem ipsum.",
+            date: new Date("2023-01-15T16:30:00.000Z")
+        },
+        {
+            id: 3,
+            title: "Blog post 3",
+            url: "/blog3",
+            imgUrl: "https://c8.alamy.com/comp/BE4PYY/older-man-reading-newspaper-with-angry-expression-BE4PYY.jpg",
+            content: "Lorem ipsum.",
+            date: new Date("2020-01-15T16:30:00.000Z")
+        }
+    ];
+
+    const [sortedPosts, setSortedPosts] = useState(posts);
+
+    const sortAscending = () => {
+        const sorted = [...sortedPosts].sort((a, b) => a.date - b.date);
+        setSortedPosts(sorted);
+    };
+    
+    const sortDescending = () => {
+        const sorted = [...sortedPosts].sort((a, b) => b.date - a.date);
+        setSortedPosts(sorted);
+    };
+    
+
+    return (
+        <Row>
+            <Col md="9">
+                <div>
+                    <button onClick={sortAscending}>Дата ↑</button>
+                    <button onClick={sortDescending}>Дата ↓</button>
+                </div>
+                {sortedPosts.map((post) => (
                     <div className="d-flex align-items-center me-5">
-                        <div className="flex-shrink-0">
-                            <img
-                                width={200}
-                                height={150}
-                                className="mr-3"
-                                src="https://st2.depositphotos.com/3261171/7891/i/450/depositphotos_78914256-stock-photo-man-drinking-tea-and-eading.jpg"
-                                alt="photo" />
-                        </div>
-                        <div className="flex-grow-1 ms-3">
-                            <h5><a href='/blog1'>Blog post 1</a></h5>
-                            <p>
-                                Lorem
-                            </p>
-                        </div>
+                    <div className="flex-shrink-0">
+                        <img
+                            width={200}
+                            height={150}
+                            className="mr-3"
+                            src={post.imgUrl}
+                            alt="photo" />
                     </div>
-
-                    <div className="d-flex align-items-center me-5">
-                        <div className="flex-shrink-0">
-                            <img
-                                width={200}
-                                height={150}
-                                className="mr-3"
-                                src="https://st3.depositphotos.com/3591429/18863/i/1600/depositphotos_188634212-stock-photo-man-reading-newspaper-fake-news.jpg"
-                                alt="photo" />
-                        </div>
-                        <div className="flex-grow-1 ms-3">
-                            <h5><a href='/blog2'>Blog post 2</a></h5>
-                            <p>
-                                Lorem
-                            </p>
-                        </div>
+                    <div className="flex-grow-1 ms-3">
+                        <h5><a href={post.url}>{post.title}</a></h5>
+                        <p>
+                            {post.content}
+                        </p>
                     </div>
+                </div>
+                ))}
+            
+            </Col>
+            <Col md="3">
+                <h5 className="text-center mt-5">Категорії</h5>
 
-                    <div className="d-flex align-items-center me-5">
-                        <div className="flex-shrink-0">
-                            <img
-                                width={200}
-                                height={150}
-                                className="mr-3"
-                                src="https://c8.alamy.com/comp/BE4PYY/older-man-reading-newspaper-with-angry-expression-BE4PYY.jpg"
-                                alt="photo" />
-                        </div>
-                        <div className="flex-grow-1 ms-3">
-                            <h5><a href='/blog3'>Blog post 3</a></h5>
-                            <p>
-                                Lorem
-                            </p>
-                        </div>
-                    </div>
+                <Card>
+                    <ListGroup variant="flush">
+                        <ListGroup.Item>категорія 1</ListGroup.Item>
+                        <ListGroup.Item>категорія 2</ListGroup.Item>
+                        <ListGroup.Item>категорія 3</ListGroup.Item>
+                        <ListGroup.Item>категорія 4</ListGroup.Item>
+                        <ListGroup.Item>категорія 5</ListGroup.Item>
+                    </ListGroup>
+                </Card>
+                <Card className="mt-3 bg-light">
+                    <Card.Body>
+                        <Card.Title>Slide widget</Card.Title>
+                        <Card.Text>
+                            Lorem
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
 
-                </Col>
-                <Col md="3">
-                    <h5 className="text-center mt-5">Категорії</h5>
+            </Col>
 
-                    <Card>
-                        <ListGroup variant="flush">
-                            <ListGroup.Item>категорія 1</ListGroup.Item>
-                            <ListGroup.Item>категорія 2</ListGroup.Item>
-                            <ListGroup.Item>категорія 3</ListGroup.Item>
-                            <ListGroup.Item>категорія 4</ListGroup.Item>
-                            <ListGroup.Item>категорія 5</ListGroup.Item>
-                        </ListGroup>
-                    </Card>
-                    <Card className="mt-3 bg-light">
-                        <Card.Body>
-                            <Card.Title>Slide widget</Card.Title>
-                            <Card.Text>
-                                Lorem
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
+        </Row>
 
-                </Col>
-
-            </Row>
-
-        );
-    }
+    );
 }
-
-export default Blog;
