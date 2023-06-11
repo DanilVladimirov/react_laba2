@@ -1,0 +1,22 @@
+{
+    "home.slide1.title": "Drink сoffee",
+    "home.slide1.text": "Lorem ipsum drink сoffee",
+
+    "home.slide2.title": "Eating potato",
+    "home.slide2.text": "Lorem ipsum eating potato",
+
+    "home.slide3.title": "Eating Burger and potato",
+    "home.slide3.text": "Lorem ipsum Eating Burger and potato.",
+
+    "team.text": "Our teams",
+    "team.button": "About team",
+
+    "team1.title": "Developers",
+    "team1.desc": "Team 1",
+
+    "team2.title": "Naturalists",
+    "team2.desc": "Team 2",
+
+    "team3.title": "Devops Team",
+    "team3.desc": "Team 3"
+}

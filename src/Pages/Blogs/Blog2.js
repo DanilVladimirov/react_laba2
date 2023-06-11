@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Image } from "react-bootstrap";
+import CommentsSection from '../../CommentsSection';
 
 class Blog1 extends Component {
     render() {
@@ -23,6 +24,7 @@ class Blog1 extends Component {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
             Aenean consectetur nibh sed diam luctus porttitor.
             </div>
+            <CommentsSection />
             </>
         );
     }
