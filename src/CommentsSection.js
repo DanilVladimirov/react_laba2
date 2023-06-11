@@ -1,40 +1,77 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { onSnapshot, addDoc, deleteDoc, updateDoc, doc} from 'firebase/firestore';
+import { commentsCollection } from './firebase';
 
-const CommentsSection = () => {
+const CommentSection = () => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(commentsCollection, (snapshot) => {
+      const commentsData = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setComments(commentsData);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   const handleCommentChange = (e) => {
     setNewComment(e.target.value);
   };
 
-  const handleAddComment = () => {
+  const handleAddComment = async () => {
     if (newComment.trim() !== '') {
-      const comment = {
-        id: Date.now(),
-        text: newComment,
-        date: new Date().toLocaleString(),
-      };
-      setComments([...comments, comment]);
-      setNewComment('');
+      try {
+        const commentRef = await addDoc(commentsCollection, {
+          text: newComment,
+          date: new Date().toLocaleString(),
+        });
+
+        const comment = {
+          id: commentRef.id,
+          text: newComment,
+          date: new Date().toLocaleString(),
+        };
+
+        setComments([...comments, comment]);
+        setNewComment('');
+      } catch (error) {
+        console.error('Помилка при додаванні коментаря:', error);
+      }
     }
   };
 
-  const handleDeleteComment = (commentId) => {
-    setComments(comments.filter((comment) => comment.id !== commentId));
+  const handleDeleteComment = async (commentId) => {
+    try{
+      await deleteDoc(doc(commentsCollection, commentId));
+      setComments(comments.filter((comment) => comment.id !== commentId));
+    } catch (error) {
+      console.error('Помилка при видалені коментаря:', error);
+    }
   };
 
-  const handleEditComment = (commentId, newText) => {
-    setComments(
-      comments.map((comment) =>
-        comment.id === commentId ? { ...comment, text: newText } : comment
-      )
-    );
+  const handleEditComment = async (commentId, newText) => {
+    const commentDoc = doc(commentsCollection, commentId);
+    try {
+      await updateDoc(commentDoc, { text: newText });
+      setComments(
+        comments.map((comment) =>
+          comment.id === commentId ? { ...comment, text: newText } : comment
+        )
+      );
+    } catch (error) {
+      console.error('Помилка при видалені коментаря:', error);
+    }
   };
 
   return (
     <div>
-      <h2>Коментарії:</h2>
+      <h2>Коммнтарії:</h2>
       {comments.map((comment) => (
         <div key={comment.id}>
           <h3>{comment.text}</h3>
@@ -60,4 +97,4 @@ const CommentsSection = () => {
   );
 };
 
-export default CommentsSection;
+export default CommentSection;
