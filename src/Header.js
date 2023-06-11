@@ -81,7 +81,7 @@ export default function Header() {
 
     return (
         <>
-            <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
+            <Navbar data-testid="header" collapseOnSelect expand="md" bg="dark" variant="dark">
                 <Container>
                     <Navbar.Brand href="/">
                         <img
@@ -94,7 +94,7 @@ export default function Header() {
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav claccName="me-auto">
+                        <Nav className="me-auto">
                             <Nav.Link href="/"> Home </Nav.Link>
                             <Nav.Link href="/about"> About us </Nav.Link>
                             <Nav.Link href="contacts"> Contacts </Nav.Link>
@@ -108,7 +108,7 @@ export default function Header() {
                             />
                             <Button variant="outline-info">Search</Button>
                         </Form>
-                        <Button className="ms-2" onClick={handleShow}>Login</Button>
+                        <Button id="loginBtn" className="ms-2" onClick={handleShow}>Login</Button>
                     </Navbar.Collapse>
                 </Container>
 
@@ -121,8 +121,8 @@ export default function Header() {
                     <Form>
                         <Form.Group controlId="fromBasicEmail">
                             <Form.Label>Email Address</Form.Label>
-                            {(emailDirty && emailError) && <div style={{ color: "red" }}>{emailError}</div>}
-                            <Form.Control onChange={e => emailHandler(e)} name="email" value={email} onBlur={e => blurHandler(e)} type="email" placeholder="Enter email" />
+                            {(emailDirty && emailError) && <div style={{ color: "red" }} data-testid="emailError">{emailError}</div>}
+                            <Form.Control data-testid="emailField" onChange={e => emailHandler(e)} name="email" value={email} onBlur={e => blurHandler(e)} type="email" placeholder="Enter email" />
                             <Form.Text className="text-muted">
                                 We'll never share your email with anyone else.
                             </Form.Text>
@@ -130,8 +130,8 @@ export default function Header() {
 
                         <Form.Group controlId="fromBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            {(passwordError && passwordDirty) && <div style={{ color: "red" }}>{passwordError}</div>}
-                            <Form.Control onChange={e => passwordHandler(e)} name="password" value={password} onBlur={e => blurHandler(e)} type="password" placeholder="Enter password">
+                            {(passwordError && passwordDirty) && <div style={{ color: "red" }} data-testid="passwordError">{passwordError}</div>}
+                            <Form.Control data-testid="passwordField" onChange={e => passwordHandler(e)} name="password" value={password} onBlur={e => blurHandler(e)} type="password" placeholder="Enter password">
                             </Form.Control>
                         </Form.Group>
 
@@ -140,7 +140,7 @@ export default function Header() {
                             <Form.Check type="checkbox" label="Remember me" />
                         </Form.Group>
 
-                        <Button disabled={!formValid} variant="primary" type="submit">
+                        <Button disabled={!formValid} variant="primary" type="submit" data-testid="submitBtn">
                             Submit
                         </Button>
 
